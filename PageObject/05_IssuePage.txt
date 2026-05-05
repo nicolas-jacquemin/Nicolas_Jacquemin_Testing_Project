@@ -1,35 +1,82 @@
 
+### **Issue functionality Testsuit (Collection of Test case) Overview**
+
 #******************** Settings ************************
 
 *** Settings ***
-Documentation	Issue Test scenario. CRUD Operation: Create, Read, Update, Delete
 
-# TODO: Write Precondition and Postcondition, Tags 
+Documentation	Testing the issue management functionality. Issue Test scenario. CRUD Operation: Create, Read, Update, Delete.
 
-Pre Condition	Tips: Project must be created by the user before 
-Post Condition	
-Tags
+# Precondition: User must be logged in and a project must already exist before running these tests.
+
+Pre Condition	Open Browser, User Must Be Logged In, Project Must Exist
+Post Condition	Close All Browsers
+Tags	Issue, TS-5-Issue
 
 #******************* Common Variables ********************
-
 
 *** Variables ***
 
 # NOTE: Please Remove your login credential before uploading Assignments
+# Here Test Data defined as a Variable for easy access
 
-# TODO: Write Issue creation field variables, Updated name of the issue
-
-
+LoginUrl= https://gitlab.com/users/sign_in
+IssueUrl= https://gitlab.com/group-slug-here/project-slug-here/-/issues/new
+UserName= XYZ
+Password= ***
+ProjectSlug= firstproject
+Valid_IssueTitle= First Issue
+Updated_IssueTitle= Updated First Issue
+Second_IssueTitle= Updated First Issue
+Duplicate_IssueTitle= Updated First Issue
+Empty=
 
 #******************** Test Cases *************************
 
-*** Test Case ***
+*** Test Cases ***
 
-# TODO: Write Positive Test Cases and Test Process steps
+# Positive Tests
 
-# Positive Test examples are below write test process steps for each below test case
+Create Issue With Valid Title
+    Navigate To New Issue Page IssueUrl
+    Input Issue Title Valid_IssueTitle
+    Submit Create Issue Form
+    Verify Page Should Contain Issue 'First Issue' was successfully created.
 
-	Create issue,
- 	Update name of issue, 
-	Create second issue with privious updated name
-    Delete first issue
+Update Name Of Issue
+    Navigate To Issue List Page ProjectSlug
+    Open Issue Valid_IssueTitle
+    Click Edit Issue Button
+    Clear Issue Title Field
+    Input Issue Title Updated_IssueTitle
+    Save Issue Changes
+    Verify Page Should Contain Issue saved.
+
+Create Second Issue With Previously Updated Name
+    Navigate To New Issue Page IssueUrl
+    Input Issue Title Second_IssueTitle
+    Submit Create Issue Form
+    Verify Page Should Contain Issue 'Updated First Issue' was successfully created.
+
+Delete First Issue
+    Navigate To Issue List Page ProjectSlug
+    Open Issue Updated_IssueTitle
+    Click Edit Or Delete Icon
+    Click Delete Issue Button
+    Confirm Deletion
+    Verify Page Should Contain Issue was deleted.
+
+
+# Negative Tests
+
+Create Issue With Empty Title
+    Navigate To New Issue Page IssueUrl
+    Input Issue Title Empty
+    Submit Create Issue Form
+    Verify That Error Message Should Show This field is required
+
+Create Issue With Duplicate Title
+    Navigate To New Issue Page IssueUrl
+    Input Issue Title Duplicate_IssueTitle
+    Submit Create Issue Form
+    Verify Page Should Contain Issue 'Updated First Issue' was successfully created.

@@ -1,44 +1,87 @@
 
+### **Project functionality Testsuit (Collection of Test case) Overview**
+
 #******************** Settings ************************
 
 *** Settings ***
 
-# TODO: Write Dcocumentation e.g. Project Test scenario. CRUD Operation: Create, Read, Update, Delete
+Documentation	Testing the project management functionality. Project Test scenario. CRUD Operation: Create, Read, Update, Delete.
 
-Documentation	
-
-# TODO: Write Precondition, Postcondition, Tags
-
-Pre Condition	 
-Post Condition	
-Tags
+Pre Condition	Open Browser, User Must Be Logged In
+Post Condition	Close All Browsers
+Tags	Project, TS-4-Project
 
 #******************* Common Variables ********************
 
 *** Variables ***
 
 # NOTE: Please Remove your login credential before uploading Assignments
+# Here Test Data defined as a Variable for easy access
 
-# TODO: Write Project creation field variables
-
-
+LoginUrl= https://gitlab.com/users/sign_in
+ProjectUrl= https://gitlab.com/projects/new
+UserName= XYZ
+Password= ***
+Valid_ProjectName= FirstProject
+Template_ProjectName= TemplateProject
+Updated_ProjectName= UpdatedTemplateProject
+Duplicate_ProjectName= FirstProject
+Empty=
 
 #******************** Test Cases *************************
 
-*** Test Case ***
+*** Test Cases ***
 
-# TODO: Write Positive and Negative Test Cases and Test Process steps
+# Positive Tests
 
-# Positive Test examples are below write test process steps for each below test case
+Create Blank Project With Valid Name
+    Navigate To Create Project Page ProjectUrl
+    Select Blank Project Option
+    Input Project Name Valid_ProjectName
+    Submit Create Project Form
+    Verify Page Should Contain Project 'FirstProject' was successfully created.
 
-	Create blank project
-	Create template project 
-	Update name of template project
-	Delete template project
-	Valide that message is showing Project 'First project ' was successfully created.
+Create Project From Template
+    Navigate To Create Project Page ProjectUrl
+    Select Create From Template Option
+    Choose Template Ruby on Rails
+    Input Project Name Template_ProjectName
+    Submit Create Project Form
+    Verify Page Should Contain Project 'TemplateProject' was successfully created.
 
-# Negative Test examples are below write test process steps for each below test case
+Update Name Of Existing Project
+    Navigate To Project Settings Page Template_ProjectName
+    Update Project Name Updated_ProjectName
+    Save Settings
+    Verify Page Should Contain Project was successfully updated.
 
-	Create a blank project with the previous same name
+Delete Project
+    Navigate To Project Settings Page Updated_ProjectName
+    Click Delete Project Button
+    Confirm Deletion By Typing Project Name Updated_ProjectName
+    Submit Delete Project Form
+    Verify Page Should Contain Project 'UpdatedTemplateProject' is in the process of being deleted.
+
+Validate Success Message After Creating Blank Project
+    Navigate To Create Project Page ProjectUrl
+    Select Blank Project Option
+    Input Project Name Valid_ProjectName
+    Submit Create Project Form
+    Verify Page Should Contain Project 'FirstProject' was successfully created.
 
 
+# Negative Tests
+
+Create Blank Project With Duplicate Name
+    Navigate To Create Project Page ProjectUrl
+    Select Blank Project Option
+    Input Project Name Duplicate_ProjectName
+    Submit Create Project Form
+    Verify Page Should Contain Name has already been taken
+
+Create Blank Project With Empty Name
+    Navigate To Create Project Page ProjectUrl
+    Select Blank Project Option
+    Input Project Name Empty
+    Submit Create Project Form
+    Verify That Error Message Should Show This field is required

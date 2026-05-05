@@ -17,15 +17,15 @@ Tags	Register, TS-3-Register
 # NOTE: Please Remove your login credential before uploading Assignments
 # Here Test Data defined as a Variable for easy access
 
-RegisterUrl=        https://gitlab.com/users/sign_up
-Valid_FirstName=    John
-Valid_LastName=     Tester
-Valid_Username=     johntester2024
-Valid_Email=        johntester2024@example.com
-Valid_Password=     SecurePass123!
-Existing_Username=  johntester2024
-Invalid_Email=      notanemail
-Weak_Password=      123
+RegisterUrl= https://gitlab.com/users/sign_up
+Valid_FirstName= John
+Valid_LastName= Tester
+Valid_Username= johntester2024
+Valid_Email= johntester2024@example.com
+Valid_Password= SecurePass123!
+Existing_Username= johntester2024
+Invalid_Email= notanemail
+Weak_Password= 123
 Empty=
 
 #******************** Test Cases *************************
@@ -36,11 +36,11 @@ Empty=
 
 Register User With Valid Credentials
     Navigate To Register Page  RegisterUrl
-    Input First Name  Valid_FirstName
-    Input Last Name   Valid_LastName
-    Input Username    Valid_Username
-    Input Email       Valid_Email
-    Input Password    Valid_Password
+    Input First Name Valid_FirstName
+    Input Last Name Valid_LastName
+    Input Username Valid_Username
+    Input Email Valid_Email
+    Input Password Valid_Password
     Complete reCAPTCHA
     Submit Registration Form
     Verify Page Should Contain Welcome to GitLab
@@ -50,62 +50,62 @@ Register User With Valid Credentials
 
 Register User With Already Existing Username
     Navigate To Register Page  RegisterUrl
-    Input First Name  Valid_FirstName
-    Input Last Name   Valid_LastName
-    Input Username    Existing_Username
-    Input Email       Valid_Email
-    Input Password    Valid_Password
+    Input First Name Valid_FirstName
+    Input Last Name Valid_LastName
+    Input Username Existing_Username
+    Input Email Valid_Email
+    Input Password Valid_Password
     Complete reCAPTCHA
     Submit Registration Form
     Verify Page Should Contain Username has already been taken
 
 Register User With Empty Password
     Navigate To Register Page  RegisterUrl
-    Input First Name  Valid_FirstName
-    Input Last Name   Valid_LastName
-    Input Username    Valid_Username
-    Input Email       Valid_Email
-    Input Password    Empty
+    Input First Name Valid_FirstName
+    Input Last Name Valid_LastName
+    Input Username Valid_Username
+    Input Email Valid_Email
+    Input Password Empty
     Submit Registration Form
     Verify That Error Message Should Show This field is required
 
 Register User With Invalid Email Format
     Navigate To Register Page  RegisterUrl
-    Input First Name  Valid_FirstName
-    Input Last Name   Valid_LastName
-    Input Username    Valid_Username
-    Input Email       Invalid_Email
-    Input Password    Valid_Password
+    Input First Name Valid_FirstName
+    Input Last Name Valid_LastName
+    Input Username Valid_Username
+    Input Email Invalid_Email
+    Input Password Valid_Password
     Submit Registration Form
     Verify That Error Message Should Show Please enter a valid email address
 
 Register User With All Empty Fields
     Navigate To Register Page  RegisterUrl
-    Input First Name  Empty
-    Input Last Name   Empty
-    Input Username    Empty
-    Input Email       Empty
-    Input Password    Empty
+    Input First Name Empty
+    Input Last Name Empty
+    Input Username Empty
+    Input Email Empty
+    Input Password Empty
     Submit Registration Form
     Verify That Error Message Should Show This field is required
 
 Register User Without Completing reCAPTCHA
     Navigate To Register Page  RegisterUrl
-    Input First Name  Valid_FirstName
-    Input Last Name   Valid_LastName
-    Input Username    Valid_Username
-    Input Email       Valid_Email
-    Input Password    Valid_Password
+    Input First Name Valid_FirstName
+    Input Last Name Valid_LastName
+    Input Username Valid_Username
+    Input Email Valid_Email
+    Input Password Valid_Password
     Submit Registration Form Without Completing reCAPTCHA
     Verify That Error Message Should Show Please verify that you are not a robot
 
 Register User With Too Weak Password
     Navigate To Register Page  RegisterUrl
-    Input First Name  Valid_FirstName
-    Input Last Name   Valid_LastName
-    Input Username    Valid_Username
-    Input Email       Valid_Email
-    Input Password    Weak_Password
+    Input First Name Valid_FirstName
+    Input Last Name Valid_LastName
+    Input Username Valid_Username
+    Input Email Valid_Email
+    Input Password Weak_Password
     Submit Registration Form
     Verify That Error Message Should Show Password is too short
 .invalid email,
